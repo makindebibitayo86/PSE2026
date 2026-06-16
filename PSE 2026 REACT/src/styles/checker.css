@@ -840,7 +840,10 @@ footer {
   .checker-left, #printBtn, #loader,
   .bg-mesh, .theme-toggle { display: none !important; }
 
-  body { background: white !important; }
+  html,
+  body,
+  .checker-page,
+  main { background: white !important; background-image: none !important; }
   main { padding: 0 !important; max-width: 100% !important; }
   .checker-container { display: block !important; }
 
