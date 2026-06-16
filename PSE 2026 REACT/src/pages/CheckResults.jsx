@@ -268,7 +268,11 @@ export default function CheckResults() {
         <div className="mesh-orb mesh-orb--1"></div>
         <div className="mesh-orb mesh-orb--2"></div>
         <div className="mesh-orb mesh-orb--3"></div>
+        <div className="mesh-orb mesh-orb--4"></div>
       </div>
+
+      {/* Grain Texture */}
+      <div className="page-grain" aria-hidden="true" />
 
       {/* Page Header */}
       <header className="page-header">
