@@ -1,0 +1,229 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   PSE 2026 — Mobile Responsiveness
+   Import / append after main.css.
+   Breakpoints:  ≤ 640px  standard mobile
+                 ≤ 400px  small phones
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Missing base style: slip-generating spinner ─────────────────────────
+   These classes exist in SlipModals.jsx but have no definition in main.css */
+.slip-generating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 60px 20px;
+  color: rgba(255,255,255,0.85);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+}
+.slip-generating__spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255,255,255,0.18);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ≤ 640px  — STANDARD MOBILE
+══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+
+  /* ── Page Header ─────────────────────────────────────────────────────── */
+  .page-header {
+    padding: 28px 16px 20px;
+  }
+  .page-subtitle {
+    white-space: normal;   /* CRITICAL: was nowrap — overflows every phone */
+    font-size: 13px;
+  }
+
+  /* ── Tab Container ───────────────────────────────────────────────────── */
+  .tab-container {
+    padding: 0 10px 36px;
+  }
+
+  /* ── Tab Nav ─────────────────────────────────────────────────────────── */
+  .tab-nav {
+    padding: 4px;
+    gap: 2px;
+  }
+  .tab-btn {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 4px;
+    gap: 5px;
+    white-space: normal;   /* override the base white-space: nowrap */
+  }
+  .tab-btn__icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 7px;
+  }
+  .tab-btn__label {
+    align-items: center;
+  }
+  .tab-btn__title {
+    font-size: 10.5px;
+    line-height: 1.25;
+  }
+  .tab-btn__sub {
+    display: none;         /* hide sub-caption — not enough room */
+  }
+
+  /* ── Panel Card ──────────────────────────────────────────────────────── */
+  .panel-card {
+    padding: 20px 14px;
+  }
+  .panel-head {
+    gap: 12px;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+  }
+  .panel-head__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+  }
+  .panel-head__title {
+    font-size: 20px;
+  }
+  .panel-head__sub {
+    font-size: 12px;
+  }
+
+  /* ── Instructions Tab: 2-col → 1-col ────────────────────────────────── */
+  .instructions-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  /* Pricing card had margin-top: 28px to push below the left column — reset */
+  .pricing-card {
+    margin-top: 0;
+  }
+  /* CTA button full-width */
+  .tab-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ── Recover Tab: 2-col → 1-col ─────────────────────────────────────── */
+  .recover-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .recover-form-card {
+    padding: 20px 14px;
+  }
+
+  /* ── Registration Form ───────────────────────────────────────────────── */
+  .form-section {
+    padding: 16px 12px 14px;
+  }
+
+  /* CRITICAL: .fields-grid had NO @media rule in main.css — adds it here */
+  .fields-grid {
+    grid-template-columns: 1fr;
+  }
+  /* Reset column-span in single-column context */
+  .field--full {
+    grid-column: 1;
+  }
+
+  /* ── Paper Grid: 2-col → 1-col ───────────────────────────────────────── */
+  .paper-grid {
+    grid-template-columns: 1fr;
+  }
+  /* Remove right borders (odd cards had them in the 2-col layout) */
+  .paper-card {
+    border-right: none;
+  }
+  /* Restore bottom border on nth-last-child(2): the 2-col rule removed it
+     to hide the separator between the last two rows. In 1-col only the
+     final item should have no bottom border. */
+  .paper-card:nth-last-child(2) {
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Submit Button: full-width on mobile ─────────────────────────────── */
+  .submit-btn {
+    width: 100%;
+    min-width: unset;
+    padding: 15px 20px;
+  }
+
+  /* ── Slip Modal: bottom-sheet on mobile ──────────────────────────────── */
+  .slip-modal {
+    padding: 0;
+    align-items: flex-end;
+  }
+  .slip-modal__content {
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    max-height: 94vh;
+    overflow-y: auto;
+  }
+  .slip-modal__actions {
+    padding: 14px 12px 0;
+    gap: 8px;
+  }
+  .slip-print-btn,
+  .slip-close-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 8px;
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  /* ── Exam Slip: scale down to fit, never reflow ──────────────────────
+     The slip is rendered at its full 720px desktop width, then zoomed
+     to fit the viewport. Layout, grid, fonts, borders — all identical
+     to the printed version. Only the outer wrapper shrinks to fit.
+  ─────────────────────────────────────────────────────────────────────── */
+  .slip-scale-wrapper {
+    width: 100%;
+    overflow: hidden;          /* clip anything that escapes during scale */
+    /* height is set dynamically via JS (see below) — fallback here */
+    min-height: 400px;
+  }
+  .exam-slip {
+    /* Lock the slip at its desktop width */
+    width: 720px;
+    /* Scale to fill the wrapper, anchored top-left */
+    transform-origin: top left;
+    /* The actual scale value is set by the inline style injected below */
+  }
+}
+
+
+/* ── Dark mode mesh: scale down orbs on mobile ───────────────────────── */
+@media (max-width: 640px) {
+  .bg-mesh .orb-1 { width: 300px; height: 300px; }
+  .bg-mesh .orb-2 { width: 260px; height: 260px; }
+  .bg-mesh .orb-3 { width: 180px; height: 180px; }
+  .bg-mesh .orb-4 { width: 200px; height: 200px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ≤ 400px  — SMALL PHONES
+══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 400px) {
+
+  .tab-btn__icon  { width: 22px; height: 22px; }
+  .tab-btn__title { font-size: 9.5px; }
+
+  .panel-card     { padding: 16px 10px; }
+  .panel-head__title { font-size: 18px; }
+
+  .form-section   { padding: 14px 10px 12px; }
+  .recover-form-card { padding: 16px 10px; }
+
+  /* slip: no overrides here — zoom-scaling handles all sizes */
+}

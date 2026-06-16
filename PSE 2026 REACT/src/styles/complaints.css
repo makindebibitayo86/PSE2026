@@ -1,0 +1,727 @@
+/* ============================================================
+   COMPLAINTS.CSS — Public Service Examination | Premium Civic UI
+   ─────────────────────────────────────────────────────────────
+   KEY CHANGES:
+   • Full dark/light mode via [data-theme] on <html>
+   • Cormorant Garamond (display) + Figtree (body) — distinctive pairing
+   • Animated gradient mesh background (CSS keyframe orbs)
+   • Glassmorphism form card with backdrop-filter
+   • Gold accent colour replaces flat blue (--gold / --gold-dark)
+   • Input icons with colour-change on focus micro-interaction
+   • Shimmer sweep on submit button hover
+   • Pulse dot on eyebrow badge
+   • Theme toggle button styles
+   • prefers-reduced-motion: removes all animations safely
+   • All existing IDs, JS hooks, and class names fully preserved
+   ============================================================ */
+
+/* ── Google Fonts ───────────────────────────────────────────── */
+/* Loaded in HTML <head> */
+
+/* ── Design Tokens ──────────────────────────────────────────── */
+.complaints-page {
+  /* Navy base */
+  --navy-900:    #0a0f1e;
+  --navy-800:    #0f172a;
+  --navy-700:    #1e2a45;
+  --navy-600:    #2d3f62;
+  --navy-400:    #4a6080;
+
+  /* Gold accent */
+  --gold:        #c9973a;
+  --gold-dark:   #a67b28;
+  --gold-light:  #e8c97a;
+  --gold-glow:   rgba(201, 151, 58, 0.18);
+
+  /* Semantic surface (light defaults) */
+  --ink:         #0a0f1e;
+  --ink-muted:   #3d4f6b;
+  --ink-faint:   #7a8faa;
+  --surface:     #ffffff;
+  --surface-alt: #f4f0ff;
+  --surface-glass: rgba(244,240,255,0.72);
+  --border:      #ddd8f0;
+  --border-focus:var(--gold);
+  --accent:      var(--gold);
+  --accent-dark: var(--gold-dark);
+  --accent-glow: var(--gold-glow);
+
+  /* Status */
+  --success:     #0d7a4e;
+  --success-bg:  #edf9f4;
+  --error:       #b91c1c;
+  --error-bg:    #fef2f2;
+  --warn-bg:     #fffbea;
+
+  /* Radii */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-card:
+    0 0 0 1px rgba(10,15,30,0.06),
+    0 4px 6px rgba(10,15,30,0.04),
+    0 12px 40px rgba(10,15,30,0.10),
+    0 1px 0 rgba(255,255,255,0.85) inset;
+  --shadow-btn:
+    0 1px 2px rgba(201,151,58,0.25),
+    0 4px 16px rgba(201,151,58,0.30);
+  --shadow-btn-hover:
+    0 2px 4px rgba(201,151,58,0.3),
+    0 8px 28px rgba(201,151,58,0.4);
+
+  /* Transitions */
+  --t:     0.2s cubic-bezier(0.4,0,0.2,1);
+  --t-slow:0.4s cubic-bezier(0.4,0,0.2,1);
+
+  /* Typography */
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body:    'Figtree', system-ui, sans-serif;
+
+  /* Mesh orb colours (light) */
+  --orb-1: rgba(139,92,246,0.22);
+  --orb-2: rgba(109,40,217,0.14);
+  --orb-3: rgba(167,139,250,0.10);
+  --orb-4: rgba(88,28,220,0.10);
+}
+
+/* ── Dark Mode Tokens ───────────────────────────────────────── */
+.complaints-page [data-theme="dark"], [data-theme="dark"] .complaints-page {
+  --ink:         #e8edf7;
+  --ink-muted:   #94a8c4;
+  --ink-faint:   #5c7294;
+  --surface:     #130e24;
+  --surface-alt: #080612;
+  --surface-glass: rgba(14,9,28,0.80);
+  --border:      #1e1535;
+  --border-focus:var(--gold);
+
+  --success:     #34d399;
+  --success-bg:  rgba(52,211,153,0.1);
+  --error:       #f87171;
+  --error-bg:    rgba(248,113,113,0.1);
+  --warn-bg:     rgba(251,191,36,0.08);
+
+  --shadow-card:
+    0 0 0 1px rgba(201,151,58,0.12),
+    0 4px 6px rgba(0,0,0,0.3),
+    0 16px 48px rgba(0,0,0,0.5);
+
+  --orb-1: rgba(139,92,246,0.18);
+  --orb-2: rgba(91,33,182,0.22);
+  --orb-3: rgba(167,139,250,0.10);
+  --orb-4: rgba(109,40,217,0.14);
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+
+.complaints-page {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--surface-alt);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  transition: background var(--t-slow), color var(--t-slow);
+}
+
+/* ── Animated Mesh Background ───────────────────────────────── */
+.bg-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 1;
+  will-change: transform;
+}
+
+.orb-1 {
+  width: 520px; height: 520px;
+  background: var(--orb-1);
+  top: -120px; left: -100px;
+  animation: drift1 22s ease-in-out infinite;
+}
+.orb-2 {
+  width: 420px; height: 420px;
+  background: var(--orb-2);
+  bottom: -80px; right: -80px;
+  animation: drift2 28s ease-in-out infinite;
+}
+.orb-3 {
+  width: 300px; height: 300px;
+  background: var(--orb-3);
+  top: 40%; left: 55%;
+  animation: drift3 18s ease-in-out infinite;
+}
+.orb-4 {
+  width: 360px; height: 360px;
+  background: var(--orb-4);
+  top: 30%; right: 60%;
+  animation: drift4 24s ease-in-out infinite;
+}
+
+@keyframes drift1 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33%      { transform: translate(60px,40px) scale(1.08); }
+  66%      { transform: translate(-30px,70px) scale(0.94); }
+}
+@keyframes drift2 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  40%     { transform: translate(-70px,-50px) scale(1.1); }
+  75%     { transform: translate(40px,-30px) scale(0.95); }
+}
+@keyframes drift3 {
+  0%,100% { transform: translate(0,0); }
+  50%     { transform: translate(-40px,50px); }
+}
+@keyframes drift4 {
+  0%,100% { transform: translate(0,0); }
+  45%     { transform: translate(60px,-40px); }
+}
+
+/* ── Grain texture ──────────────────────────────────────────── */
+.page-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* ── Main Content Wrapper ───────────────────────────────────── */
+.main {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 64px 24px 80px;
+}
+
+/* ── Page Header ────────────────────────────────────────────── */
+.page-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.complaints-page .page-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  background: var(--gold-glow);
+  padding: 5px 14px 5px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(201,151,58,0.25);
+}
+
+/* Pulse dot */
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  position: relative;
+  flex-shrink: 0;
+}
+.complaints-page .pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  animation: pulse-ring 2s ease-out infinite;
+}
+@keyframes pulse-ring {
+  0%   { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 0;   transform: scale(2.2); }
+}
+.complaints-page .page-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5vw, 48px);
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: 12px;
+  transition: color var(--t-slow);
+}
+.complaints-page .page-subtitle {
+  font-size: 15px;
+  color: var(--ink-muted);
+  font-weight: 300;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* ── Form Card — Glassmorphism ──────────────────────────────── */
+.form-card {
+  background: var(--surface-glass);
+  backdrop-filter: blur(24px) saturate(1.3);
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  padding: 48px 52px;
+  animation: cardIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background var(--t-slow), border-color var(--t-slow), box-shadow var(--t-slow);
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Form Sections ──────────────────────────────────────────── */
+.complaints-page .form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.complaints-page .form-section-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--ink);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: -0.01em;
+}
+.complaints-page .form-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 32px 0;
+}
+
+/* ── Field Layout ───────────────────────────────────────────── */
+.complaints-page .field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.complaints-page .field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+/* ── Labels ─────────────────────────────────────────────────── */
+.complaints-page .field-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color var(--t-slow);
+}
+.complaints-page .required { color: var(--gold); margin-left: 2px; }
+.complaints-page .field-hint {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-top: -3px;
+  font-style: italic;
+}
+
+/* ── Input wrapper with icon ────────────────────────────────── */
+.complaints-page .input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.complaints-page .input-wrapper .input-icon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-faint);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  transition: color var(--t);
+  z-index: 1;
+}
+.complaints-page .input-wrapper .field-input {
+  padding-left: 38px;
+}
+
+/* Icon colour on focus */
+.complaints-page .input-wrapper:focus-within .input-icon {
+  color: var(--gold);
+}
+
+/* ── Inputs ─────────────────────────────────────────────────── */
+.complaints-page .field-input {
+  width: 100%;
+  padding: 11px 15px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--ink);
+  transition: border-color var(--t), box-shadow var(--t), background var(--t-slow), color var(--t-slow);
+  appearance: none;
+  -webkit-appearance: none;
+}
+.complaints-page .field-input::placeholder { color: var(--ink-faint); }
+.complaints-page .field-input:hover { border-color: #a0b0c8; }
+.complaints-page .field-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-glow);
+  background: var(--surface);
+}
+.complaints-page .field-input:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ── Select ─────────────────────────────────────────────────── */
+.complaints-page .select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.complaints-page .select-wrapper .input-icon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-faint);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  transition: color var(--t);
+  z-index: 1;
+}
+.complaints-page .select-wrapper:focus-within .input-icon {
+  color: var(--gold);
+}
+.complaints-page .field-select {
+  cursor: pointer;
+  padding-left: 38px;
+  padding-right: 42px;
+}
+.complaints-page .select-arrow {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-faint);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  transition: transform var(--t), color var(--t);
+}
+.complaints-page .select-wrapper:focus-within .select-arrow {
+  color: var(--gold);
+}
+
+/* ── Textarea ───────────────────────────────────────────────── */
+.complaints-page .field-textarea {
+  min-height: 130px;
+  resize: vertical;
+  line-height: 1.65;
+}
+
+/* ── Subject Box ────────────────────────────────────────────── */
+.complaints-page .subject-box[aria-hidden="false"] {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.complaints-page .subject-box[aria-hidden="true"] {
+  display: none;
+}
+
+/* ── Checkbox Grid ──────────────────────────────────────────── */
+.complaints-page .checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 10px;
+}
+.complaints-page .checkbox-card {
+  cursor: pointer;
+  user-select: none;
+}
+.complaints-page .checkbox-card input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.complaints-page .checkbox-card-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  transition: border-color var(--t), background var(--t), box-shadow var(--t);
+}
+.complaints-page .checkbox-card:hover .checkbox-card-inner {
+  border-color: var(--gold);
+  background: var(--gold-glow);
+}
+.complaints-page .checkbox-indicator {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color var(--t), background var(--t), color var(--t);
+  color: transparent;
+}
+.complaints-page .checkbox-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  transition: color var(--t);
+  line-height: 1.3;
+}
+.complaints-page .checkbox-card input:checked ~ .checkbox-card-inner {
+  border-color: var(--gold);
+  background: var(--gold-glow);
+  box-shadow: 0 0 0 3px var(--gold-glow);
+}
+.complaints-page .checkbox-card input:checked ~ .checkbox-card-inner .checkbox-indicator {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: white;
+}
+.complaints-page .checkbox-card input:checked ~ .checkbox-card-inner .checkbox-label {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ── Form Footer ────────────────────────────────────────────── */
+.complaints-page .form-footer {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+}
+
+/* ── Submit Button ──────────────────────────────────────────── */
+.complaints-page .submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px 28px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: box-shadow var(--t), transform var(--t);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer sweep */
+.complaints-page .submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255,255,255,0.35) 50%,
+    transparent 70%
+  );
+  transition: left 0.55s ease;
+  pointer-events: none;
+}
+.complaints-page .submit-btn:hover::before { left: 150%; }
+.complaints-page .submit-btn:hover {
+  box-shadow: var(--shadow-btn-hover);
+  transform: translateY(-2px);
+}
+.complaints-page .submit-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-btn);
+}
+.complaints-page .submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.complaints-page .submit-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+.complaints-page .submit-btn-icon {
+  display: flex;
+  align-items: center;
+  transition: transform var(--t);
+}
+.complaints-page .submit-btn:hover .submit-btn-icon { transform: translateX(4px); }
+
+/* Loading spinner */
+.complaints-page .submit-btn.is-loading .submit-btn-text::after {
+  content: '';
+  display: inline-block;
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+.complaints-page .submit-btn.is-loading .submit-btn-icon { display: none; }
+.complaints-page .submit-btn.is-loading::before { display: none; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Status Message ─────────────────────────────────────────── */
+.complaints-page .status-message {
+  text-align: center;
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 13px 18px;
+  border-radius: var(--radius-md);
+  display: none;
+  line-height: 1.5;
+  animation: fadeSlideIn 0.3s ease both;
+}
+.complaints-page .status-message.is-visible { display: block; }
+.complaints-page .status-message.is-success {
+  color: var(--success);
+  background: var(--success-bg);
+  border: 1px solid rgba(13,122,78,0.2);
+}
+.complaints-page .status-message.is-error {
+  color: var(--error);
+  background: var(--error-bg);
+  border: 1px solid rgba(185,28,28,0.18);
+}
+.complaints-page .status-message.is-loading {
+  color: var(--ink-muted);
+  background: var(--warn-bg);
+  border: 1px solid rgba(201,151,58,0.2);
+}
+
+@keyframes fadeSlideIn {
+  from { opacity:0; transform:translateY(-6px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .complaints-page .form-card { padding: 32px 28px; }
+  .complaints-page .main { padding: 48px 20px 80px; }
+}
+
+@media (max-width: 540px) {
+  .complaints-page .main { padding: 36px 14px 60px; }
+  .complaints-page .form-card { padding: 26px 18px; border-radius: var(--radius-lg); }
+  .complaints-page .field-row { grid-template-columns: 1fr; }
+  .complaints-page .checkbox-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 360px) {
+  .complaints-page .form-card { padding: 20px 14px; }
+}
+
+/* ── Reduced Motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .complaints-page .orb { display: none; }
+  .complaints-page .pulse-dot::after { display: none; }
+  .complaints-page .submit-btn::before { display: none; }
+}
+
+
+/* ── Navbar & Footer adaptation for complaints page ─────────── */
+/*
+   The navbar reads CSS custom properties from :root (green palette).
+   We remap only the tokens the navbar actually uses so it shifts to
+   the complaints purple/gold palette without touching Navbar.css.
+*/
+html[data-page="complaints"] {
+  /* Kill root green tokens inside this page context */
+  --border-focus: #c9973a;          /* gold instead of green */
+  --g500: #8b5cf6;                  /* purple stand-in for active states */
+  --g600: #7c3aed;
+  --g400: #a78bfa;
+  --g300: #c4b5fd;
+  --g100: #ede9fe;
+  --g50:  #f5f3ff;
+  --shadow-btn: 0 4px 14px rgba(139,92,246,0.30);
+  --border: rgba(109,40,217,0.12);
+  --border-strong: rgba(109,40,217,0.20);
+  --bg: #f4f0ff;
+  --bg-panel: #ffffff;
+  --bg-input: #faf9ff;
+  --ink-sub: #3d2e6b;
+  --ink-muted: #6b5b9e;
+  --ink-faint: #9c8ec4;
+}
+html[data-page="complaints"][data-theme="dark"] {
+  --border-focus: #c9973a;
+  --g500: #7c3aed;
+  --g600: #6d28d9;
+  --g400: #a78bfa;
+  --g300: #c4b5fd;
+  --g100: rgba(139,92,246,0.15);
+  --g50:  rgba(139,92,246,0.08);
+  --shadow-btn: 0 4px 14px rgba(139,92,246,0.25);
+  --border: rgba(139,92,246,0.12);
+  --border-strong: rgba(139,92,246,0.22);
+  --bg: #080612;
+  --bg-panel: #0e0920;
+  --bg-input: #100c1e;
+  --ink-sub: #b4a4d8;
+  --ink-muted: #7a6eaa;
+  --ink-faint: #4a4070;
+}
+
+html[data-page="complaints"] footer {
+  background: #f4f0ff;
+  transition: background 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+html[data-page="complaints"][data-theme="dark"] footer {
+  background: #080612;
+}

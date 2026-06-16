@@ -1,0 +1,225 @@
+/* ── Navbar — Apple liquid glass ─────────────────────────── */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  position: relative;
+  padding: 0 40px;
+  height: 72px;
+
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(28px) saturate(2.2) brightness(1.08);
+  -webkit-backdrop-filter: blur(28px) saturate(2.2) brightness(1.08);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 4px 24px rgba(0,0,0,0.05);
+
+  transition: background var(--dur-slow, 380ms) ease,
+              border-color var(--dur-slow, 380ms) ease,
+              box-shadow var(--dur-slow, 380ms) ease,
+              transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] .navbar {
+  background: rgba(10, 14, 26, 0.40);
+  backdrop-filter: blur(28px) saturate(2.0) brightness(0.85);
+  -webkit-backdrop-filter: blur(28px) saturate(2.0) brightness(0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.20), 0 4px 24px rgba(0,0,0,0.18);
+}
+
+.navbar--hidden {
+  transform: translateY(-100%);
+}
+
+/* ── Logo ─────────────────────────────────────────────────── */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  text-decoration: none;
+  transition: opacity 220ms ease;
+}
+.nav-logo:hover { opacity: 0.82; }
+
+.nav-logo img {
+  width: 47px;
+  height: 47px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.logo-text--primary {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink, #0e1a2e);
+  letter-spacing: -0.01em;
+  transition: color 380ms ease;
+}
+.logo-text--secondary {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-muted, #7b8eab);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 380ms ease;
+}
+
+/* ── Nav Center (links absolutely centered) ───────────────── */
+.nav-links-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+
+/* ── Nav Right ────────────────────────────────────────────── */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink-sub, #455571);
+  text-decoration: none;
+  transition: color 220ms ease, background 220ms ease;
+  white-space: nowrap;
+}
+.nav-link:hover {
+  color: var(--ink, #0e1a2e);
+  background: rgba(255, 255, 255, 0.45);
+}
+.nav-link--active {
+  color: var(--ink, #0e1a2e);
+  background: transparent;
+  font-weight: 600;
+  box-shadow: none;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+[data-theme="dark"] .nav-link { color: rgba(220,230,255,0.70); }
+[data-theme="dark"] .nav-link:hover { background: rgba(255,255,255,0.08); color: #fff; }
+[data-theme="dark"] .nav-link--active {
+  background: transparent;
+  color: #fff;
+  box-shadow: none;
+}
+
+/* ── Theme Toggle ─────────────────────────────────────────── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--ink-sub, #455571);
+  transition: color 220ms ease, background 220ms ease;
+  flex-shrink: 0;
+}
+.theme-toggle:hover {
+  color: var(--ink, #0e1a2e);
+  background: rgba(0, 0, 0, 0.06);
+}
+.theme-toggle:focus-visible { outline: 2px solid var(--accent, #1f8a52); }
+[data-theme="dark"] .theme-toggle { color: rgba(220,230,255,0.70); }
+[data-theme="dark"] .theme-toggle:hover { color: #fff; background: rgba(255,255,255,0.10); }
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .navbar { padding: 0 24px; height: 64px; }
+  .logo-text--secondary { display: none; }
+  .nav-logo img { width: 38px; height: 38px; }
+}
+
+
+/* ── Mobile (≤600px): logo icon only, links centered, toggle right ── */
+@media (max-width: 600px) {
+  .navbar {
+    padding: 0 16px;
+    height: 68px;
+    position: sticky;
+  }
+
+  .logo-text { display: none; }
+  .nav-logo img { width: 64px; height: 64px; }
+
+  .nav-right {
+    flex: 1;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .nav-links {
+    justify-content: center;
+    gap: 0;
+  }
+
+  .nav-link { font-size: 12px; padding: 6px 8px; }
+
+  .theme-toggle {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+/* ── Hide absolute-center links on mobile (flex layout takes over) ── */
+@media (max-width: 600px) {
+  .nav-links-center {
+    position: static;
+    transform: none;
+  }
+}
+
+/* ── Keep links truly centered at ALL screen sizes ───────── */
+@media (max-width: 600px) {
+  .nav-links-center {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .nav-right {
+    flex: 0;
+    margin-left: auto;
+  }
+
+  .nav-link { font-size: 11px; padding: 5px 6px; }
+}
+
+@media (max-width: 380px) {
+  .nav-link { font-size: 10px; padding: 5px 4px; }
+}

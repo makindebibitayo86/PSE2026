@@ -1,0 +1,884 @@
+/* ── Page background — only active on checker page ── */
+[data-page="checker"] body {
+  background: #E0EAFC;
+  background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);
+  background: linear-gradient(to right, #CFDEF3, #E0EAFC);
+  transition: background 380ms ease, color 380ms ease;
+}
+[data-page="checker"][data-theme="dark"] body {
+  background: #090f1e;
+}
+
+/* ============================================================
+   CHECKER.CSS — Premium PSE Result Checker
+   Oyo State Government | 2026
+   Design: Refined Government Authority
+   Fonts: Cormorant Garamond (display) + Outfit (body)
+   ============================================================ */
+
+/* ── 1. DESIGN TOKENS ────────────────────────────────────────
+   All theme values live here. Switching light ↔ dark is done
+   by setting [data-theme="dark"] on <html> — JS toggles that.
+   ──────────────────────────────────────────────────────────── */
+:root {
+  --orb-1: radial-gradient(circle, rgba(192,148,53,0.18) 0%, transparent 65%);
+  --orb-2: radial-gradient(circle, rgba(14,31,61,0.10)   0%, transparent 65%);
+  --orb-3: radial-gradient(circle, rgba(139,0,0,0.07)    0%, transparent 65%);
+  --shadow-sm:   0 1px 3px rgba(14,31,61,0.06), 0 1px 2px rgba(14,31,61,0.04);
+  --shadow-md:   0 4px 6px rgba(14,31,61,0.05), 0 10px 30px rgba(14,31,61,0.08);
+  --shadow-lg:   0 8px 16px rgba(14,31,61,0.06), 0 24px 56px rgba(14,31,61,0.10);
+  --shadow-btn:  0 2px 8px rgba(14,31,61,0.20), 0 1px 2px rgba(14,31,61,0.12);
+  --shadow-gold: 0 2px 12px rgba(192,148,53,0.35);
+  --r-sm:  8px;
+  --r-md:  14px;
+  --r-lg:  20px;
+  --r-xl:  28px;
+  --r-2xl: 36px;
+  --ease:      cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:  cubic-bezier(0, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast:  150ms;
+  --dur-base:  220ms;
+  --dur-slow:  380ms;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Outfit', system-ui, sans-serif;
+}
+
+.checker-page {
+
+  /* Brand palette */
+  --brand-navy:      #0e1f3d;
+  --brand-gold:      #c09435;
+  --brand-gold-lt:   #e8b84b;
+  --brand-gold-faint:rgba(192, 148, 53, 0.12);
+  --brand-crimson:   #8B0000;   /* cert-card only — do not override */
+
+  /* Light theme defaults */
+  --bg:              linear-gradient(to right, #CFDEF3, #E0EAFC);
+  --bg-panel:        rgba(255, 255, 255, 0.78);
+  --bg-panel-solid:  #ffffff;
+  --bg-input:        rgba(255, 255, 255, 0.90);
+  --bg-input-focus:  #ffffff;
+
+  --ink:             #0e1f3d;
+  --ink-sub:         #455571;
+  --ink-muted:       #7b8eab;
+  --ink-faint:       #a8b8cc;
+
+  --border:          rgba(14, 31, 61, 0.10);
+  --border-focus:    #0e1f3d;
+  --border-strong:   rgba(14, 31, 61, 0.20);
+
+  --accent:          #0e1f3d;
+  --accent-hover:    #162e57;
+  --accent-glow:     rgba(14, 31, 61, 0.08);
+
+  --gold:            var(--brand-gold);
+  --gold-lt:         var(--brand-gold-lt);
+  --gold-faint:      var(--brand-gold-faint);
+
+  /* Mesh orb colours (light) */
+
+  /* Shadows */
+
+  /* Radii */
+
+  /* Motion */
+
+  /* Typography */
+
+}
+
+/* ── Dark theme overrides ────────────────────────────────── */
+.checker-page [data-theme="dark"], [data-theme="dark"] .checker-page {
+  --bg:              #090f1e;
+  --bg-panel:        rgba(16, 28, 54, 0.82);
+  --bg-panel-solid:  #101c36;
+  --bg-input:        rgba(16, 28, 54, 0.70);
+  --bg-input-focus:  rgba(22, 38, 72, 0.90);
+
+  --ink:             #e8eef8;
+  --ink-sub:         #9db0cc;
+  --ink-muted:       #6a82a3;
+  --ink-faint:       #3a4f6a;
+
+  --border:          rgba(232, 238, 248, 0.08);
+  --border-focus:    var(--brand-gold);
+  --border-strong:   rgba(232, 238, 248, 0.15);
+
+  --accent:          var(--brand-gold);
+  --accent-hover:    var(--brand-gold-lt);
+  --accent-glow:     rgba(192, 148, 53, 0.12);
+
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.30);
+  --shadow-md:   0 4px 6px rgba(0,0,0,0.25), 0 10px 30px rgba(0,0,0,0.35);
+  --shadow-lg:   0 8px 16px rgba(0,0,0,0.30), 0 24px 56px rgba(0,0,0,0.40);
+  --shadow-btn:  0 2px 8px rgba(192,148,53,0.30), 0 1px 2px rgba(0,0,0,0.20);
+
+  --orb-1: radial-gradient(circle, rgba(192,148,53,0.12) 0%, transparent 65%);
+  --orb-2: radial-gradient(circle, rgba(14,80,200,0.10)  0%, transparent 65%);
+  --orb-3: radial-gradient(circle, rgba(180,0,0,0.07)    0%, transparent 65%);
+}
+
+/* ── 2. RESET & BASE ─────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* body background scoped to checker page only */
+.checker-page { min-height: 100vh; background: var(--bg); color: var(--ink); transition: background var(--dur-slow) var(--ease), color var(--dur-slow) var(--ease); }
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--font-body); cursor: pointer; border: none; }
+ul, ol { list-style: none; }
+
+/* Focus ring — keyboard accessible, not visible on mouse click */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── 3. BACKGROUND MESH ──────────────────────────────────── */
+.bg-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.mesh-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  will-change: transform;
+}
+
+/* Orb sizes & positions */
+.checker-page .mesh-orb--1 {
+  width: 600px; height: 600px;
+  top: -10%;  left: -8%;
+  background: var(--orb-1);
+  animation: orbDrift 18s ease-in-out infinite;
+}
+.checker-page .mesh-orb--2 {
+  width: 500px; height: 500px;
+  top: 30%; right: -10%;
+  background: var(--orb-2);
+  animation: orbDrift 24s ease-in-out infinite reverse;
+}
+.checker-page .mesh-orb--3 {
+  width: 380px; height: 380px;
+  bottom: 0; left: 35%;
+  background: var(--orb-3);
+  animation: orbDrift 20s ease-in-out infinite 6s;
+}
+
+@keyframes orbDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(40px, -30px) scale(1.05); }
+  66%       { transform: translate(-20px, 40px) scale(0.97); }
+}
+
+/* ── 4. MAIN & PAGE HEADER ───────────────────────────────── */
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 52px 32px 80px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 44px;
+  animation: fadeUp var(--dur-slow) var(--ease-out) both;
+}
+
+.page-header__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: var(--gold-faint);
+  border: 1px solid rgba(192, 148, 53, 0.25);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--brand-gold);
+  margin-bottom: 14px;
+}
+
+[data-theme="dark"] .page-header__badge {
+  background: rgba(192, 148, 53, 0.15);
+  color: var(--brand-gold-lt);
+}
+
+.badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--brand-gold);
+  box-shadow: 0 0 0 0 rgba(192, 148, 53, 0.4);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(192, 148, 53, 0.4); }
+  50%       { box-shadow: 0 0 0 5px rgba(192, 148, 53, 0); }
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 5vw, 46px);
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 10px;
+  transition: color var(--dur-slow) var(--ease);
+}
+
+.page-subtitle {
+  font-size: 15px;
+  color: var(--ink-muted);
+  font-weight: 400;
+  max-width: 440px;
+  margin: 0 auto;
+  transition: color var(--dur-slow) var(--ease);
+}
+
+/* ── 7. CHECKER LAYOUT ───────────────────────────────────── */
+.checker-container {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  animation: fadeUp var(--dur-slow) var(--ease-out) 0.1s both;
+}
+
+/* Shared panel styles */
+.checker-left,
+.checker-right {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  transition: background var(--dur-slow) var(--ease),
+              border-color var(--dur-slow) var(--ease),
+              box-shadow var(--dur-slow) var(--ease);
+}
+
+/* LEFT panel */
+.checker-left {
+  flex: 0 0 330px;
+  padding: 32px 28px;
+  position: sticky;
+  top: 88px;
+}
+
+/* RIGHT panel */
+.checker-right {
+  flex: 1;
+  min-height: 440px;
+  padding: 36px 40px;
+}
+
+/* Panel header (icon + title + desc) */
+.panel-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.panel-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: var(--r-sm);
+  background: var(--gold-faint);
+  color: var(--brand-gold);
+  flex-shrink: 0;
+  border: 1px solid rgba(192, 148, 53, 0.20);
+}
+
+[data-theme="dark"] .panel-icon {
+  background: rgba(192, 148, 53, 0.15);
+}
+
+.panel-header h2 {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 3px;
+  transition: color var(--dur-slow) var(--ease);
+}
+
+.panel-desc {
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  transition: color var(--dur-slow) var(--ease);
+}
+
+/* ── 8. FORM FIELDS ──────────────────────────────────────── */
+.checker-page #searchForm {
+  gap: 20px !important;
+  margin-bottom: 20px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.checker-page .field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.checker-page .field__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-sub);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color var(--dur-base) var(--ease);
+}
+
+.checker-page .field__wrapper {
+  position: relative;
+}
+
+.checker-page .field__icon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  color: var(--ink-faint);
+  pointer-events: none;
+  transition: color var(--dur-base) var(--ease);
+  z-index: 1;
+}
+
+.checker-page .field__wrapper input {
+  width: 100%;
+  padding: 12px 14px 12px 38px;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--r-md);
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 400;
+  color: var(--ink);
+  outline: none;
+  transition:
+    border-color var(--dur-base) var(--ease),
+    box-shadow var(--dur-base) var(--ease),
+    background var(--dur-base) var(--ease),
+    color var(--dur-slow) var(--ease);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.checker-page .field__wrapper input::placeholder {
+  color: var(--ink-faint);
+  font-weight: 400;
+}
+
+.checker-page .field__wrapper input:hover {
+  border-color: var(--border-focus);
+}
+
+.checker-page .field__wrapper input:focus {
+  border-color: var(--accent);
+  background: var(--bg-input-focus);
+  box-shadow: 0 0 0 3.5px var(--accent-glow);
+}
+
+.field__wrapper input:focus ~ .field__icon,
+.field__wrapper:focus-within .checker-page .field__icon {
+  color: var(--accent);
+}
+
+/* Hint text */
+.checker-page .field__hint {
+  margin-bottom: 16px !important;
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  line-height: 1.4;
+  transition: color var(--dur-slow) var(--ease);
+}
+
+/* ── 9. SUBMIT BUTTON ────────────────────────────────────── */
+.checker-page .submit-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  padding: 14px 20px;
+  background: var(--accent);
+  color: white;
+  border-radius: var(--r-md);
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: var(--shadow-btn);
+  overflow: hidden;
+  transition:
+    background var(--dur-base) var(--ease),
+    box-shadow var(--dur-base) var(--ease),
+    transform var(--dur-fast) var(--ease),
+    opacity var(--dur-base) var(--ease);
+  margin-top: 4px;
+}
+
+[data-theme="light"] .checker-page .submit-btn { color: #fff; }
+[data-theme="dark"]  .checker-page .submit-btn { color: var(--brand-navy); }
+
+.checker-page .submit-btn:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 4px 16px rgba(192,148,53,0.35), 0 2px 4px rgba(0,0,0,0.15);
+  transform: translateY(-1px);
+}
+.checker-page .submit-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-btn);
+}
+.checker-page .submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Shimmer sweep on hover */
+.checker-page .submit-btn__shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+    transparent 40%,
+    rgba(255,255,255,0.18) 50%,
+    transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 0.5s var(--ease);
+}
+.submit-btn:hover .checker-page .submit-btn__shimmer {
+  transform: translateX(100%);
+}
+
+/* ── 10. INFO NOTE ───────────────────────────────────────── */
+.checker-page .info-note {
+  margin-top: 16px !important;
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 10px 12px;
+  background: var(--accent-glow);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  transition:
+    background var(--dur-slow) var(--ease),
+    color var(--dur-slow) var(--ease);
+}
+.checker-page .info-note svg { flex-shrink: 0; margin-top: 1px; }
+
+/* ── 11. LOADER ──────────────────────────────────────────── */
+/* JS sets display:block to reveal */
+#loader {
+  display: none;
+  width: 40px; height: 40px;
+  border: 3px solid var(--border-strong);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+  margin: 60px auto;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── 12. RESULT DISPLAY / EMPTY STATE ───────────────────── */
+.result-display { min-height: 300px; }
+
+/* When result is scaled to fit (small screens), clip overflow neatly */
+.result-display:has(.cert-card[style*="transform"]) {
+  overflow: hidden;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px;
+  min-height: 300px;
+  gap: 12px;
+}
+
+.empty-state__icon {
+  color: var(--ink-faint);
+  opacity: 0.6;
+  margin-bottom: 4px;
+}
+
+.empty-state__title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink-sub);
+  letter-spacing: -0.02em;
+  transition: color var(--dur-slow) var(--ease);
+}
+
+.empty-state__body {
+  font-size: 13.5px;
+  color: var(--ink-muted);
+  max-width: 340px;
+  line-height: 1.6;
+  transition: color var(--dur-slow) var(--ease);
+}
+
+.empty-state__steps {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--accent-glow);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--ink-sub);
+  transition:
+    background var(--dur-slow) var(--ease),
+    color var(--dur-slow) var(--ease);
+}
+.step__num {
+  width: 18px; height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+[data-theme="dark"] .step__num { color: var(--brand-navy); }
+
+/* Not-found state (injected by JS) */
+.not-found-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--ink-faint);
+  gap: 10px;
+}
+.not-found-msg svg { opacity: 0.35; }
+.not-found-msg p {
+  font-size: 13.5px;
+  color: var(--ink-muted) !important;
+  margin: 0 !important;
+}
+
+/* ── 13. PRINT BUTTON ────────────────────────────────────── */
+/* JS sets display:inline-flex after result loads */
+#printBtn {
+  display: none; /* overridden by JS */
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: transparent;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: var(--r-md);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-top: 20px;
+  transition:
+    background var(--dur-base) var(--ease),
+    box-shadow var(--dur-base) var(--ease),
+    color var(--dur-base) var(--ease);
+}
+#printBtn:hover {
+  background: var(--accent-glow);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* ── 14. STATUS MESSAGES (injected by JS) ────────────────── */
+/* JS uses showStatus() to inject inline-styled <p> — no override needed. */
+
+/* ── 15. ANIMATIONS ──────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── 16. FOOTER ──────────────────────────────────────────── */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  background: var(--bg-panel-solid);
+  padding: 20px 32px;
+  transition:
+    background var(--dur-slow) var(--ease),
+    border-color var(--dur-slow) var(--ease);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+.footer-main {
+  font-size: 12.5px;
+  color: var(--ink-muted);
+  font-weight: 500;
+  transition: color var(--dur-slow) var(--ease);
+}
+.footer-sub {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  margin-top: 2px;
+  transition: color var(--dur-slow) var(--ease);
+}
+
+/* ── 17. RESPONSIVE ──────────────────────────────────────── */
+
+/* Tablet (≤ 960px): stack checker panels */
+@media (max-width: 960px) {
+  .checker-container { flex-direction: column; }
+  .checker-left {
+    flex: none;
+    width: 100%;
+    position: static;
+  }
+  .checker-right { min-height: 360px; }
+}
+
+/* Tablet nav (≤ 768px) */
+@media (max-width: 768px) {
+  main { padding: 40px 20px 60px; }
+  .checker-right { padding: 28px 24px; }
+}
+
+/* Mobile (≤ 540px) */
+@media (max-width: 540px) {
+  main { padding: 28px 14px 56px; }
+
+  .page-title { font-size: 28px; }
+  .page-subtitle { font-size: 13.5px; }
+  .page-header { margin-bottom: 28px; }
+
+  .checker-left  { padding: 24px 20px; border-radius: var(--r-lg); }
+  .checker-right { padding: 24px 18px; border-radius: var(--r-lg); }
+
+  .empty-state__steps { gap: 8px; }
+  .step { font-size: 11px; padding: 5px 10px; }
+}
+
+/* Very small (≤ 360px) */
+@media (max-width: 360px) {
+  main { padding: 20px 12px 48px; }
+}
+
+/* ── 18. REDUCED MOTION ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .mesh-orb,
+  .badge-dot,
+  #loader,
+  .checker-page .submit-btn__shimmer { animation: none; }
+  .checker-page .submit-btn:hover { transform: none; }
+  * { transition-duration: 0.01ms !important; }
+}
+
+/* ============================================================
+   CERT-CARD RESULT STYLES
+   These styles are INTENTIONALLY UNCHANGED from the original.
+   They only apply to .cert-card and its children, injected
+   into #resultDisplay by checker.js.
+   ============================================================ */
+
+.cert-card {
+  font-family: Georgia, 'Times New Roman', serif;
+  width: 100%;
+  background: #fff;
+  border: 3px double #8B0000;
+  padding: 28px 20px;
+  position: relative;
+  box-shadow: 5px 5px 0 #c8a96e, 0 2px 18px rgba(0,0,0,0.10);
+  margin-top: 4px;
+  border-radius: 0;
+}
+.cert-card::before {
+  content: ''; position: absolute; inset: 7px;
+  border: 1px solid #c8a96e; pointer-events: none;
+}
+.cert-card::after {
+  content: ''; position: absolute; inset: 14px;
+  border: 0.5px solid rgba(200,169,110,0.35); pointer-events: none;
+}
+
+/* Cert header */
+.cert-card .cert-header      { text-align: center; margin-bottom: 22px; }
+.cert-card .logo-wrap        { margin-bottom: 10px; }
+.cert-card .logo-wrap img    { max-height:120px; max-width:120px; display:block; margin:0 auto; object-fit:contain; }
+.cert-card .state-name       { font-size:13px; font-weight:bold; color:#8B0000; letter-spacing:2px; text-transform:uppercase; margin-bottom:2px; }
+.cert-card .cert-title       { font-size:17px; font-weight:bold; color:#1a1a1a; letter-spacing:0.5px; }
+.cert-card .cert-subtitle    { font-size:10px; color:#777; letter-spacing:3px; margin-top:3px; }
+
+/* Dividers */
+.cert-card .divider {
+  height:2px;
+  background:linear-gradient(to right, transparent, #8B0000 20%, #c8a96e 50%, #8B0000 80%, transparent);
+  margin:12px 0;
+}
+.cert-card .thin-divider {
+  height:1px;
+  background:linear-gradient(to right, transparent, #c8a96e, transparent);
+  margin:12px 0;
+}
+
+/* Candidate name */
+.cert-card .candidate-name              { text-align:center; margin-bottom:14px; }
+.cert-card .candidate-name .label      { font-size:10px; letter-spacing:3px; color:#8B0000; text-transform:uppercase; }
+.cert-card .candidate-name .name       { font-size:24px; font-weight:bold; color:#1a1a1a; margin-top:4px; text-transform:uppercase; }
+.cert-card .candidate-name .exam-no   { font-size:11px; color:#666; margin-top:3px; }
+
+/* Stats row */
+.cert-card .stats-row          { display:flex; gap:8px; margin-bottom:18px; }
+.cert-card .stat-box           { flex:1; background:#fffdf7; border:1px solid #e8dcc8; padding:10px 6px; text-align:center; }
+.cert-card .stat-box .stat-num { font-size:22px; font-weight:bold; line-height:1; }
+.cert-card .stat-box .stat-label { font-size:9px; letter-spacing:1px; color:#777; text-transform:uppercase; margin-top:4px; }
+.cert-card .stat-sat  .stat-num { color:#1a3a6e; }
+.cert-card .stat-pass .stat-num { color:#1e6e1e; }
+.cert-card .stat-fail .stat-num { color:#c0392b; }
+.cert-card .stat-resit .stat-num { color:#7d5a00; }
+
+/* Result table */
+.cert-card .result-table                    { width:100%; border-collapse:collapse; font-size:12px; }
+.cert-card .result-table thead tr          { background:#8B0000; color:#f5e6c8; }
+.cert-card .result-table thead th          { padding:7px 8px; font-weight:normal; letter-spacing:1.5px; font-size:10px; text-transform:uppercase; }
+.cert-card .result-table tbody tr:nth-child(odd)  { background:#fffdf7; }
+.cert-card .result-table tbody tr:nth-child(even) { background:#fdf6ec; }
+.cert-card .result-table tbody td          { padding:7px 8px; border-bottom:1px solid #ede3d0; color:#1a1a1a; font-size:inherit; font-weight:normal; background:inherit; }
+.cert-card .sn-col    { color:#888; font-size:11px; }
+.cert-card .score-col { text-align:center; font-weight:800; }
+.cert-card .remark-col { text-align:center; font-weight:800; font-size:11px; letter-spacing:1px; }
+.cert-card .remark-pass { color:#1e6e1e; }
+.cert-card .remark-fail { color:#c0392b; }
+
+/* Resit notice */
+.cert-card .resit-notice { margin-top:14px; background:#fff8ee; border-left:3px solid #c8a96e; padding:9px 12px; font-size:12px; color:#5a3e00; }
+.cert-card .resit-notice strong { font-size:10px; letter-spacing:1px; text-transform:uppercase; color:#8B6000; }
+
+/* Footer / signature */
+.cert-card .result-footer       { display:flex; justify-content:space-between; align-items:flex-end; margin-top:24px; font-size:11px; color:#666; }
+.cert-card .sig-block           { text-align:center; }
+.cert-card .sig-block img       { max-height:55px; max-width:180px; display:block; margin:0 auto; object-fit:contain; vertical-align:bottom; }
+.cert-card .sig-line            { width:160px; border-top:1px solid #8B0000; margin-bottom:4px; }
+.cert-card .sig-title           { font-size:10px; font-weight:bold; color:#8B0000; letter-spacing:0.5px; }
+.cert-card .sig-label           { font-size:9px; letter-spacing:1px; color:#888; text-transform:uppercase; }
+.cert-card .issue-info          { text-align:right; }
+.cert-card .issue-info .date    { font-size:10px; color:#8B0000; letter-spacing:1px; }
+.cert-card .issue-info .note    { font-size:9px; color:#aaa; margin-top:3px; }
+
+/* Cert mobile */
+@media (max-width: 640px) {
+  .cert-card {
+    border-left: none; border-right: none;
+    border-top: 3px double #8B0000; border-bottom: 3px double #8B0000;
+    box-shadow: none; padding: 22px 14px;
+  }
+  .cert-card::before { left:4px; right:4px; }
+  .cert-card::after  { left:8px; right:8px; }
+  .cert-card .stat-box .stat-num   { font-size:18px; }
+  .cert-card .stat-box .stat-label { font-size:8px; }
+  .cert-card .cert-title           { font-size:15px; }
+  .cert-card .result-table         { font-size:11px; }
+}
+
+/* ── 19. PRINT ───────────────────────────────────────────── */
+@media print {
+  .navbar, footer, .page-header,
+  .checker-left, #printBtn, #loader,
+  .bg-mesh, .theme-toggle { display: none !important; }
+
+  body { background: white !important; }
+  main { padding: 0 !important; max-width: 100% !important; }
+  .checker-container { display: block !important; }
+
+  .checker-right {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+  }
+
+  .cert-card {
+    box-shadow: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 24px 28px !important;
+    border: 3px double #8B0000 !important;
+    min-height: 80vh !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    transform: none !important;
+  }
+
+  .result-display { height: auto !important; overflow: visible !important; }
+
+  .cert-card .result-table { font-size: 13px; }
+  .cert-card .result-table thead th { font-size: 11px; padding: 8px; }
+  .cert-card .result-table tbody td { padding: 8px; }
+
+  .cert-card .result-table thead tr,
+  .cert-card .stat-box,
+  .cert-card .resit-notice {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+@page { size: A4 portrait; margin: 10mm 15mm; }

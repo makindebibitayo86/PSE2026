@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 Compulsory Examination – Candidate Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/checker.css">
+  <link rel="stylesheet" href="styles/register.css">
+</head>
+<body>
+
+  <div class="bg-mesh" aria-hidden="true">
+    <div class="mesh-orb mesh-orb--1"></div>
+    <div class="mesh-orb mesh-orb--2"></div>
+    <div class="mesh-orb mesh-orb--3"></div>
+  </div>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo" aria-label="Oyo State Public Service Examination">
+      <img src="assets/images/logo.png" alt="Oyo State Government Logo" width="52" height="52">
+      <span class="logo-text">
+        <span class="logo-text--primary">Oyo State</span>
+        <span class="logo-text--secondary">Public Service Examination</span>
+      </span>
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links" role="list">
+        <li><a href="register.html" class="nav-link nav-link--active" aria-current="page">Register</a></li>
+        <li><a href="index.html" class="nav-link">Check Results</a></li>
+        <li><a href="complaints.html" class="nav-link">Complaints</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">
+        <span class="theme-toggle__track">
+          <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </span>
+          <span class="theme-toggle__thumb"></span>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <header class="page-header">
+      <div class="page-header__badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        CANDIDATE REGISTRATION
+      </div>
+      <h1 class="page-title">2026 Public Service Examination Registration</h1>
+      <p class="page-subtitle">Complete all fields accurately as they appear in your official records.</p>
+    </header>
+
+    <section id="regSection" class="reg-three-col" aria-label="Candidate registration">
+
+      <!-- COLUMN 1: Instructions -->
+      <div class="reg-sidebar" role="complementary" aria-label="Registration guide">
+        <div class="panel-header">
+          <div class="panel-icon" aria-hidden="true">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/>
+            </svg>
+          </div>
+          <div>
+            <h2>Registration Guide</h2>
+            <p class="panel-desc">Read carefully before proceeding.</p>
+          </div>
+        </div>
+
+        <div class="reg-instructions">
+          <div class="instructions-group-label">Registration Steps</div>
+
+          <div class="instruction-item">
+            <span class="instruction-num" aria-hidden="true">1</span>
+            <div>
+              <strong>Personal Information</strong>
+              <p>Enter your name, phone and LGA exactly as in your official civil service records.</p>
+            </div>
+          </div>
+          <div class="instruction-item">
+            <span class="instruction-num" aria-hidden="true">2</span>
+            <div>
+              <strong>Ministry &amp; Department</strong>
+              <p>Select your Ministry first, then your Department or Agency. Contact your HR unit if unsure.</p>
+            </div>
+          </div>
+          <div class="instruction-item">
+            <span class="instruction-num" aria-hidden="true">3</span>
+            <div>
+              <strong>Grade Level</strong>
+              <p>Select your current confirmed grade level as per your appointment or last promotion letter.</p>
+            </div>
+          </div>
+          <div class="instruction-item">
+            <span class="instruction-num" aria-hidden="true">4</span>
+            <div>
+              <strong>Payment &amp; Papers</strong>
+              <p>Enter your Bank Transaction Reference number, select amount paid and choose your papers.</p>
+            </div>
+          </div>
+          <div class="instruction-item">
+            <span class="instruction-num" aria-hidden="true">5</span>
+            <div>
+              <strong>Declaration</strong>
+              <p>Read and accept the statutory declaration. False information is a civil service offence.</p>
+            </div>
+          </div>
+          <div class="instruction-item">
+            <span class="instruction-num" aria-hidden="true">6</span>
+            <div>
+              <strong>Exam Slip</strong>
+              <p>Print immediately after registration. No slip means no entry on examination day.</p>
+            </div>
+          </div>
+
+          <div class="instructions-divider" aria-hidden="true"></div>
+
+<div class="panel-header" style="margin-bottom: 14px;">
+  <div class="panel-icon panel-icon--recover" aria-hidden="true">
+    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="17 8 12 3 7 8"/>
+      <line x1="12" y1="3" x2="12" y2="15"/>
+    </svg>
+  </div>
+  <div>
+    <h2>Lost Your Slip?</h2>
+    <p class="panel-desc">Retrieve and reprint it here before exam day.</p>
+  </div>
+</div>
+
+          <div class="instruction-item instruction-item--recover">
+            <span class="instruction-num instruction-num--recover" aria-hidden="true">A</span>
+            <div>
+              <strong>Enter Your Name</strong>
+              <p>Provide any one of your names — surname, first name, or other name — as registered.</p>
+            </div>
+          </div>
+          <div class="instruction-item instruction-item--recover">
+            <span class="instruction-num instruction-num--recover" aria-hidden="true">B</span>
+            <div>
+              <strong>Enter Phone Number</strong>
+              <p>Use the exact phone number you submitted during registration.</p>
+            </div>
+          </div>
+          <div class="instruction-item instruction-item--recover">
+            <span class="instruction-num instruction-num--recover" aria-hidden="true">C</span>
+            <div>
+              <strong>Enter Grade Level</strong>
+              <p>Select the grade level you registered under — used for identity verification.</p>
+            </div>
+          </div>
+          <div class="instruction-item instruction-item--recover">
+            <span class="instruction-num instruction-num--recover" aria-hidden="true">D</span>
+            <div>
+              <strong>Retrieve &amp; Print</strong>
+              <p>Click "Retrieve Slip" to load your slip. Print immediately and present on exam day.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-note reg-warning" role="alert">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          Duplicate registrations using the same phone number will be rejected automatically.
+        </div>
+
+        <div class="info-note reg-bank-note" role="note">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+          </svg>
+          Payment must be made to the designated Oyo State Government Bank account. The Transaction Reference (Tran Ref) is printed on your bank teller receipt or included in your transfer notification.
+        </div>
+
+        <div class="pricing-legend" aria-label="Payment and papers guide">
+          <div class="pricing-legend__title">Payment → Papers</div>
+          <div class="pricing-grid">
+            <div class="pricing-row"><span class="price-tag">₦1,000</span><span class="price-arrow">→</span><span>1 Paper</span></div>
+            <div class="pricing-row"><span class="price-tag">₦2,000</span><span class="price-arrow">→</span><span>2 Papers</span></div>
+            <div class="pricing-row"><span class="price-tag">₦3,000</span><span class="price-arrow">→</span><span>3 Papers</span></div>
+            <div class="pricing-row"><span class="price-tag">₦4,000</span><span class="price-arrow">→</span><span>4 Papers</span></div>
+            <div class="pricing-row"><span class="price-tag">₦5,000</span><span class="price-arrow">→</span><span>5 Papers</span></div>
+            <div class="pricing-row"><span class="price-tag">₦6,000</span><span class="price-arrow">→</span><span>6 Papers</span></div>
+            <div class="pricing-row"><span class="price-tag">₦7,000</span><span class="price-arrow">→</span><span>7 Papers</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMN 2: Registration Form -->
+      <div class="reg-form-panel">
+        <div class="panel-header">
+          <div class="panel-icon" aria-hidden="true">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div>
+            <h2>Candidate Registration Form</h2>
+            <p class="panel-desc">All fields marked <span class="req-star" aria-label="required">*</span> are required.</p>
+          </div>
+        </div>
+
+        <form id="regForm" novalidate autocomplete="off">
+
+          <!-- ── SECTION 1: Personal Information ── -->
+          <fieldset class="form-section" id="step1">
+            <legend class="form-section__title">
+              <span class="section-num">1</span> Personal Information
+            </legend>
+            <div class="fields-grid">
+
+              <div class="field field--full">
+                <label for="fullName" class="field__label">Full Name <span class="req-star" aria-hidden="true">*</span></label>
+                <div class="field__wrapper">
+                  <span class="field__icon" aria-hidden="true">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                    </svg>
+                  </span>
+                  <input type="text" id="fullName" name="fullName" placeholder="e.g. Adeyemi Oluwaseun Adeola"
+                    required aria-required="true" aria-describedby="fullName-hint">
+                </div>
+                <span id="fullName-hint" class="field__hint">Enter your name exactly as in your official records</span>
+              </div>
+
+              <div class="field">
+                <label for="phone" class="field__label">Phone Number <span class="req-star" aria-hidden="true">*</span></label>
+                <div class="field__wrapper">
+                  <span class="field__icon" aria-hidden="true">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.56 3.41 2 2 0 0 1 3.54 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.72a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                  </span>
+                  <input type="tel" id="phone" name="phone" placeholder="e.g. 08012345678"
+                    required aria-required="true" aria-describedby="phone-hint" maxlength="11">
+                </div>
+                <span id="phone-hint" class="field__hint">11-digit Nigerian phone number</span>
+              </div>
+
+              <div class="field">
+                <label for="lga" class="field__label">Local Government of Residence <span class="req-star" aria-hidden="true">*</span></label>
+                <div class="field__wrapper field__wrapper--select">
+                  <span class="field__icon" aria-hidden="true">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                    </svg>
+                  </span>
+                  <select id="lga" name="lga" required aria-required="true" aria-describedby="lga-hint">
+                    <option value="" disabled selected>— Select your LGA —</option>
+                  </select>
+                  <span class="select-arrow" aria-hidden="true">
+                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </div>
+                <span id="lga-hint" class="field__hint">Select your LGA within Oyo State</span>
+              </div>
+
+            </div>
+          </fieldset>
+
+          <!-- ── SECTION 2: Ministry, Department & Grade Level ── -->
+          <fieldset class="form-section" id="step2">
+            <legend class="form-section__title">
+              <span class="section-num">2</span> Ministry, Department &amp; Grade Level
+            </legend>
+            <div class="fields-grid">
+
+              <div class="field field--full">
+                <label for="ministry" class="field__label">Ministry <span class="req-star" aria-hidden="true">*</span></label>
+                <div class="field__wrapper field__wrapper--select">
+                  <span class="field__icon" aria-hidden="true">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                  </span>
+                  <select id="ministry" name="ministry" required aria-required="true" aria-describedby="ministry-hint">
+                    <option value="" disabled selected>— Select your Ministry —</option>
+                  </select>
+                  <span class="select-arrow" aria-hidden="true">
+                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </div>
+                <span id="ministry-hint" class="field__hint">Select the Ministry you are deployed under</span>
+              </div>
+
+              <div class="field field--full">
+                <label for="department" class="field__label">Department / Agency <span class="req-star" aria-hidden="true">*</span></label>
+                <div class="field__wrapper field__wrapper--select">
+                  <span class="field__icon" aria-hidden="true">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                    </svg>
+                  </span>
+                  <select id="department" name="department" required aria-required="true" aria-describedby="dept-hint" disabled>
+                    <option value="" disabled selected>— Select Ministry first —</option>
+                  </select>
+                  <span class="select-arrow" aria-hidden="true">
+                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </div>
+                <span id="dept-hint" class="field__hint">Select your Department or Agency within the Ministry</span>
+              </div>
+
+              <div class="field">
+                <label for="gradeLevel" class="field__label">Current Grade Level <span class="req-star" aria-hidden="true">*</span></label>
+                <div class="field__wrapper field__wrapper--select">
+                  <span class="field__icon" aria-hidden="true">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                  </span>
+                  <select id="gradeLevel" name="gradeLevel" required aria-required="true" aria-describedby="gl-hint">
+                    <option value="" disabled selected>— Select Grade Level —</option>
+                  </select>
+                  <span class="select-arrow" aria-hidden="true">
+                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </div>
+                <span id="gl-hint" class="field__hint">Your current confirmed grade level</span>
+              </div>
+
+            </div>
+          </fieldset>
+
+          <!-- ── SECTION 3: Payment & Exam Papers ── -->
+          <fieldset class="form-section" id="step3">
+            <legend class="form-section__title">
+              <span class="section-num">3</span> Payment &amp; Exam Papers
+            </legend>
+            <div class="fields-grid">
+
+              <div class="field field--full">
+                <label for="tranRef" class="field__label">Bank Transaction Reference <span class="req-star" aria-hidden="true">*</span></label>
+                <div class="field__wrapper">
+                  <span class="field__icon" aria-hidden="true">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+                    </svg>
+                  </span>
+                  <input type="text" id="tranRef" name="tranRef" placeholder="e.g. ZTF25050112345678"
+                    required aria-required="true" aria-describedby="tranRef-hint"
+                    maxlength="20" autocomplete="off" style="text-transform:uppercase">
+                </div>
+                <span id="tranRef-hint" class="field__hint">Transaction Reference (Tran Ref) printed on your Bank teller receipt or transfer alert</span>
+              </div>
+
+              <div class="field">
+                <label for="amountPaid" class="field__label">Amount Paid <span class="req-star" aria-hidden="true">*</span></label>
+                <div class="field__wrapper field__wrapper--select">
+                  <span class="field__icon" aria-hidden="true">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                  </span>
+                  <select id="amountPaid" name="amountPaid" required aria-required="true" aria-describedby="amount-hint">
+                    <option value="" disabled selected>— Select amount paid —</option>
+                    <option value="1000">₦1,000 — 1 Paper</option>
+                    <option value="2000">₦2,000 — 2 Papers</option>
+                    <option value="3000">₦3,000 — 3 Papers</option>
+                    <option value="4000">₦4,000 — 4 Papers</option>
+                    <option value="5000">₦5,000 — 5 Papers</option>
+                    <option value="6000">₦6,000 — 6 Papers</option>
+                    <option value="7000">₦7,000 — 7 Papers</option>
+                  </select>
+                  <span class="select-arrow" aria-hidden="true">
+                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </div>
+                <span id="amount-hint" class="field__hint">₦1,000 per exam paper</span>
+              </div>
+
+              <div class="field">
+                <label for="examCentre" class="field__label">Preferred Exam Centre <span class="req-star" aria-hidden="true">*</span></label>
+                <div class="field__wrapper field__wrapper--select">
+                  <span class="field__icon" aria-hidden="true">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+                    </svg>
+                  </span>
+                  <select id="examCentre" name="examCentre" required aria-required="true" aria-describedby="centre-hint">
+                    <option value="" disabled selected>— Select exam centre —</option>
+                  </select>
+                  <span class="select-arrow" aria-hidden="true">
+                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </div>
+                <span id="centre-hint" class="field__hint">Centres are mapped to your LGA</span>
+              </div>
+
+            </div>
+
+            <!-- Paper Selection -->
+            <div class="paper-selection-wrapper" id="paperSelectionWrapper" aria-live="polite">
+              <div class="paper-selection-header">
+                <div class="paper-selection-title">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                  </svg>
+                  Select Examination Papers
+                </div>
+                <div class="paper-selection-counter" id="paperCounter" aria-live="polite">
+                  <span id="selectedCount">0</span> / <span id="allowedCount">0</span> selected
+                </div>
+              </div>
+              <div class="paper-selection-hint" id="paperHint" role="status">
+                Select your amount paid above to see available papers.
+              </div>
+              <div class="paper-grid" id="paperGrid" role="group" aria-label="Exam paper selection"></div>
+            </div>
+          </fieldset>
+
+          <!-- ── SECTION 4: Passport Photograph (Optional) ── -->
+          <fieldset class="form-section" id="step4">
+            <legend class="form-section__title">
+              <span class="section-num">4</span> Passport Photograph <span class="optional-label">(Optional)</span>
+            </legend>
+            <div class="photo-upload-area" id="photoUploadArea" tabindex="0" role="button"
+              aria-label="Upload passport photograph" aria-describedby="photo-hint">
+              <div class="photo-upload-placeholder" id="photoPlaceholder">
+                <div class="photo-upload-icon" aria-hidden="true">
+                  <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                  </svg>
+                </div>
+                <p class="photo-upload-text">Click or drag &amp; drop your passport photo here</p>
+                <p class="photo-upload-sub">JPG or PNG · Max 2MB · Passport style, white background</p>
+              </div>
+              <img id="photoPreview" class="photo-preview" src="" alt="Passport photograph preview" style="display:none">
+              <input type="file" id="passportPhoto" name="passportPhoto" accept="image/jpeg,image/png"
+                class="file-input-hidden" tabindex="-1">
+            </div>
+            <span id="photo-hint" class="field__hint" style="margin-top:8px;display:block;">
+              Optional. JPG or PNG only. Max 2MB.
+            </span>
+            <div id="photoError" class="field-error" role="alert" style="display:none"></div>
+          </fieldset>
+
+          <!-- ── SECTION 5: Statutory Declaration ── -->
+          <fieldset class="form-section declaration-section" id="step5">
+            <legend class="form-section__title">
+              <span class="section-num">5</span> Statutory Declaration
+            </legend>
+
+            <div class="declaration-box" role="region" aria-label="Declaration text">
+              <p class="declaration-intro">
+                I, <strong id="declNameDisplay" class="decl-name-live">[ your full name will appear here ]</strong>, hereby solemnly declare that:
+              </p>
+              <ol class="declaration-list">
+                <li>All information provided in this registration form is true, complete and accurate to the best of my knowledge and belief.</li>
+                <li>I am a serving officer in the Oyo State Civil Service and I am duly eligible to sit for this examination.</li>
+                <li>The Bank Transaction Reference entered is valid and represents a payment made by me or on my behalf solely for the purpose of this examination.</li>
+                <li>I understand that any false, misleading or fraudulent information provided herein shall render my registration void, result in immediate disqualification, and constitute a civil service offence liable to disciplinary proceedings under the Public Service Rules of Oyo State.</li>
+                <li>I consent to the processing of my personal data by the Office of the Head of Service, Oyo State, for the purpose of administering this examination and communicating results to the relevant Ministry, Department or Agency.</li>
+              </ol>
+            </div>
+
+            <label class="declaration-checkbox-label" id="declarationLabel">
+              <input type="checkbox" id="declarationCheck" name="declarationCheck"
+                aria-required="true" aria-describedby="decl-hint">
+              <span class="decl-checkbox-box" aria-hidden="true">
+                <svg class="decl-check-icon" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span class="decl-checkbox-text">
+                I have read and fully understood the above declaration. I accept complete legal responsibility for the accuracy of all information submitted in this form.
+                <span class="req-star" aria-hidden="true">*</span>
+              </span>
+            </label>
+            <span id="decl-hint" class="field__hint" style="margin-top:6px;display:block;">
+              You must accept this declaration before you can submit your registration.
+            </span>
+            <div id="declError" class="field-error" role="alert" style="display:none">
+              You must accept the declaration before submitting.
+            </div>
+          </fieldset>
+
+          <!-- ── Submit ── -->
+          <div class="form-submit-area">
+            <button type="submit" class="submit-btn" id="submitBtn" aria-label="Submit registration" disabled>
+              <span class="submit-btn__text">Submit Registration</span>
+              <span class="submit-btn__icon" aria-hidden="true">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path d="M22 2 11 13M22 2 15 22l-4-9-9-4 20-7z"/>
+                </svg>
+              </span>
+              <span class="submit-btn__shimmer" aria-hidden="true"></span>
+            </button>
+            <p class="submit-note submit-note--decl" id="submitDeclNote">
+              Accept the declaration above to enable submission.
+            </p>
+            <p class="submit-note" aria-live="polite" id="formStatusMsg"></p>
+          </div>
+
+        </form>
+
+        <div id="regLoader" role="status" aria-label="Submitting registration" style="display:none"></div>
+      </div>
+
+      <!-- COLUMN 3: Recover Slip -->
+      <div class="recover-panel" aria-label="Slip recovery">
+        <div class="panel-header">
+          <div class="panel-icon panel-icon--recover" aria-hidden="true">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <div>
+            <h2>Recover Your Slip</h2>
+            <p class="panel-desc">Lost your slip? Retrieve and print it here before your exam.</p>
+          </div>
+        </div>
+
+        <form id="recoverForm" novalidate autocomplete="off">
+
+          <div class="recover-fields">
+
+            <div class="field">
+              <label for="recoverName" class="field__label">Your Name <span class="req-star" aria-hidden="true">*</span></label>
+              <div class="field__wrapper">
+                <span class="field__icon" aria-hidden="true">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                  </svg>
+                </span>
+                <input type="text" id="recoverName" name="recoverName"
+                  placeholder="Enter surname, first or other name"
+                  required aria-required="true"
+                  aria-describedby="recoverName-hint">
+              </div>
+              <span id="recoverName-hint" class="field__hint">Any one of your registered names — surname, first name, or other name</span>
+            </div>
+
+            <div class="field">
+              <label for="recoverPhone" class="field__label">Phone Number <span class="req-star" aria-hidden="true">*</span></label>
+              <div class="field__wrapper">
+                <span class="field__icon" aria-hidden="true">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.56 3.41 2 2 0 0 1 3.54 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.72a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                </span>
+                <input type="tel" id="recoverPhone" name="recoverPhone"
+                  placeholder="e.g. 08012345678"
+                  required aria-required="true"
+                  aria-describedby="recoverPhone-hint" maxlength="11">
+              </div>
+              <span id="recoverPhone-hint" class="field__hint">The phone number used during registration</span>
+            </div>
+
+            <div class="field">
+              <label for="recoverGradeLevel" class="field__label">Grade Level <span class="req-star" aria-hidden="true">*</span></label>
+              <div class="field__wrapper field__wrapper--select">
+                <span class="field__icon" aria-hidden="true">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                  </svg>
+                </span>
+                <select id="recoverGradeLevel" name="recoverGradeLevel" required aria-required="true" aria-describedby="recoverGL-hint">
+                  <option value="" disabled selected>— Select Grade Level —</option>
+                </select>
+                <span class="select-arrow" aria-hidden="true">
+                  <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </div>
+              <span id="recoverGL-hint" class="field__hint">Used for identity verification</span>
+            </div>
+
+          </div>
+
+          <div id="recoverError" class="recover-error" role="alert" style="display:none">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <span id="recoverErrorText"></span>
+          </div>
+
+          <div class="recover-submit-area">
+            <button type="submit" class="recover-btn" id="recoverBtn">
+              <span class="recover-btn__text">Retrieve Slip</span>
+              <span class="recover-btn__icon" aria-hidden="true">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+              </span>
+            </button>
+          </div>
+
+          <div id="recoverLoader" class="recover-loader" role="status" aria-label="Searching for your slip" style="display:none"></div>
+
+        </form>
+
+        <div class="recover-info-note" role="note">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/>
+          </svg>
+          The recovered slip will not include your passport photograph for security reasons. Carry a recent passport photo to the exam venue.
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-inner">
+      <p class="footer-main">Conducted by the Office of The Head of Service</p>
+      <p class="footer-sub">Oyo State Government Secretariat, Ibadan &nbsp;·&nbsp; 2026</p>
+    </div>
+  </footer>
+
+  <!-- Exam Slip Modal -->
+  <div id="slipModal" class="slip-modal" role="dialog" aria-modal="true" aria-label="Exam Slip" style="display:none">
+    <div class="slip-modal__backdrop"></div>
+    <div class="slip-modal__content">
+      <div class="slip-modal__actions no-print">
+        <button class="slip-print-btn" id="slipPrintBtn" aria-label="Print exam slip">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9V2h12v7"/><rect x="6" y="14" width="12" height="8" rx="1"/>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+          </svg>
+          Print Exam Slip
+        </button>
+        <button class="slip-close-btn" id="slipCloseBtn" aria-label="Close slip">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+          New Registration
+        </button>
+      </div>
+      <div id="examSlip" class="exam-slip"><!-- Filled by JS --></div>
+    </div>
+  </div>
+
+  <script src="scripts/theme.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="scripts/register.js"></script>
+</body>
+</html>
