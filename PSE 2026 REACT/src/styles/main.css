@@ -1,41 +1,63 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{
+
+/* ── Design Tokens — scoped to .register-page (mirrors .complaints-page pattern) ── */
+.register-page {
   --g900:#0a2818;--g800:#0f3d22;--g700:#155230;--g600:#1a6b3f;--g500:#1f8a52;
   --g400:#27a865;--g300:#4dc98a;--g100:#d4f5e4;--g50:#edfaf3;
   --a600:#c07a10;--a500:#d68b18;--a400:#e9a22a;--a300:#f5be5a;--a100:#fef3d6;--a50:#fffbf0;
+
+  /* Semantic (light defaults) */
   --ink:#0d1f13;--ink-sub:#2d4a38;--ink-muted:#5a7a65;--ink-faint:#8aaa94;
-  /* Light bg: green-tinted white, mirrors complaints' #f4f0ff purple tint */
-  --bg:#f2faf5;--bg-panel:#ffffff;--bg-input:#f8fdf9;
+  --surface:     #ffffff;
+  --surface-alt: #f2faf5;
   --surface-glass: rgba(242,250,245,0.78);
+  --bg:#f2faf5;--bg-panel:#ffffff;--bg-input:#f8fdf9;
   --border:rgba(15,61,34,0.12);--border-strong:rgba(15,61,34,0.20);--border-focus:#27a865;
-  --shadow-sm:0 1px 3px rgba(10,40,24,0.08);--shadow-md:0 4px 16px rgba(10,40,24,0.10);
-  --shadow-lg:0 8px 32px rgba(10,40,24,0.14);--shadow-btn:0 4px 14px rgba(31,138,82,0.35);
+  --shadow-sm:0 1px 3px rgba(10,40,24,0.08);
+  --shadow-md:0 4px 16px rgba(10,40,24,0.10);
+  --shadow-lg:0 8px 32px rgba(10,40,24,0.14);
+  --shadow-btn:0 4px 14px rgba(31,138,82,0.35);
+  --shadow-card:
+    0 0 0 1px rgba(10,40,24,0.06),
+    0 4px 6px rgba(10,40,24,0.04),
+    0 12px 40px rgba(10,40,24,0.10),
+    0 1px 0 rgba(255,255,255,0.85) inset;
   --r-sm:6px;--r-md:10px;--r-lg:16px;--r-xl:24px;
   --dur:200ms;--ease:cubic-bezier(0.4,0,0.2,1);
   --font-display:'DM Serif Display',Georgia,serif;
   --font-body:'Plus Jakarta Sans',system-ui,sans-serif;
 
-  /* Mesh orb colours (light) — mirrors complaints light purple values */
+  /* Mesh orb colours (light) — exact complaints values, green substituted for purple */
   --orb-1: rgba(31,138,82,0.22);
   --orb-2: rgba(22,125,68,0.14);
   --orb-3: rgba(55,170,100,0.10);
   --orb-4: rgba(18,105,55,0.10);
 }
-[data-theme=dark]{
+
+/* ── Dark Mode Tokens ── */
+.register-page [data-theme="dark"],
+[data-theme="dark"] .register-page {
   --ink:#e8f5ee;--ink-sub:#b8d4c4;--ink-muted:#7a9e88;--ink-faint:#4a6e58;
-  /* Dark bg: mirrors complaints' #130e24 — tinted, not pure black */
-  --bg:#080f0a;--bg-panel:#0c1a10;--bg-input:#0e2014;
-  --surface-glass: rgba(10,22,14,0.82);
+  /* Lighter dark base so orbs dissolve instead of floating on black */
+  --surface:     #111e15;
+  --surface-alt: #0d1a10;
+  --surface-glass: rgba(13,26,16,0.80);
+  --bg:#0d1a10;--bg-panel:#111e15;--bg-input:#132018;
   --border:rgba(39,168,101,0.12);--border-strong:rgba(39,168,101,0.22);--border-focus:#4dc98a;
   --shadow-sm:0 1px 3px rgba(0,0,0,0.4);--shadow-md:0 4px 16px rgba(0,0,0,0.5);
   --shadow-lg:0 8px 32px rgba(0,0,0,0.6);--shadow-btn:0 4px 14px rgba(39,168,101,0.30);
-  /* Dark mode orbs — mirrors complaints dark opacity levels exactly */
-  --orb-1: rgba(31,138,82,0.18);
-  --orb-2: rgba(22,125,68,0.22);
-  --orb-3: rgba(55,170,100,0.10);
-  --orb-4: rgba(18,105,55,0.14);
+  --shadow-card:
+    0 0 0 1px rgba(39,168,101,0.12),
+    0 4px 6px rgba(0,0,0,0.3),
+    0 16px 48px rgba(0,0,0,0.5);
+
+  /* Low opacity orbs — edges must dissolve, not glow */
+  --orb-1: rgba(31,138,82,0.12);
+  --orb-2: rgba(22,125,68,0.10);
+  --orb-3: rgba(55,170,100,0.06);
+  --orb-4: rgba(18,105,55,0.08);
 }
 
 /* ── Base ── */
@@ -52,58 +74,69 @@ body,#pse-root{
 img{max-width:100%;height:auto;display:block;}
 button{font-family:var(--font-body);cursor:pointer;border:none;}
 
-/* ── Animated Mesh Background ── */
-.bg-mesh {
+/* ── Register Page Wrapper ── */
+.register-page {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── Animated Mesh Background — identical to complaints, green palette ── */
+.register-page .bg-mesh {
   position: fixed; inset: 0; z-index: 0;
   pointer-events: none; overflow: hidden;
 }
 
-.bg-mesh .orb {
+.register-page .orb {
   position: absolute; border-radius: 50%;
   filter: blur(80px); will-change: transform; opacity: 1;
 }
-.bg-mesh .orb-1 {
+.register-page .orb-1 {
   width: 520px; height: 520px; background: var(--orb-1);
   top: -120px; left: -100px;
-  animation: gDrift1 22s ease-in-out infinite;
+  animation: drift1 22s ease-in-out infinite;
 }
-.bg-mesh .orb-2 {
+.register-page .orb-2 {
   width: 420px; height: 420px; background: var(--orb-2);
   bottom: -80px; right: -80px;
-  animation: gDrift2 28s ease-in-out infinite;
+  animation: drift2 28s ease-in-out infinite;
 }
-.bg-mesh .orb-3 {
+.register-page .orb-3 {
   width: 300px; height: 300px; background: var(--orb-3);
   top: 40%; left: 55%;
-  animation: gDrift3 18s ease-in-out infinite;
+  animation: drift3 18s ease-in-out infinite;
 }
-.bg-mesh .orb-4 {
+.register-page .orb-4 {
   width: 360px; height: 360px; background: var(--orb-4);
   top: 30%; right: 60%;
-  animation: gDrift4 24s ease-in-out infinite;
+  animation: drift4 24s ease-in-out infinite;
 }
 
-@keyframes gDrift1 {
+@keyframes drift1 {
   0%,100% { transform: translate(0,0) scale(1); }
-  33%      { transform: translate(55px,45px) scale(1.07); }
-  66%      { transform: translate(-25px,65px) scale(0.95); }
+  33%      { transform: translate(60px,40px) scale(1.08); }
+  66%      { transform: translate(-30px,70px) scale(0.94); }
 }
-@keyframes gDrift2 {
+@keyframes drift2 {
   0%,100% { transform: translate(0,0) scale(1); }
-  40%     { transform: translate(-65px,-45px) scale(1.1); }
-  75%     { transform: translate(35px,-25px) scale(0.94); }
+  40%     { transform: translate(-70px,-50px) scale(1.1); }
+  75%     { transform: translate(40px,-30px) scale(0.95); }
 }
-@keyframes gDrift3 {
+@keyframes drift3 {
   0%,100% { transform: translate(0,0); }
-  50%     { transform: translate(-35px,45px); }
+  50%     { transform: translate(-40px,50px); }
 }
-@keyframes gDrift4 {
+@keyframes drift4 {
   0%,100% { transform: translate(0,0); }
-  45%     { transform: translate(55px,-35px); }
+  45%     { transform: translate(60px,-40px); }
 }
 
-/* Grain texture overlay */
-.page-grain {
+/* ── Grain texture — identical to complaints ── */
+.register-page .page-grain {
   position: fixed; inset: 0;
   pointer-events: none; z-index: 0;
   opacity: 0.028;
@@ -112,7 +145,32 @@ button{font-family:var(--font-body);cursor:pointer;border:none;}
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bg-mesh .orb { animation: none !important; }
+  .register-page .orb { animation: none !important; }
+}
+
+/* ── Shared tokens on :root for navbar, modals, and other components ── */
+:root {
+  --g900:#0a2818;--g800:#0f3d22;--g700:#155230;--g600:#1a6b3f;--g500:#1f8a52;
+  --g400:#27a865;--g300:#4dc98a;--g100:#d4f5e4;--g50:#edfaf3;
+  --a600:#c07a10;--a500:#d68b18;--a400:#e9a22a;--a300:#f5be5a;--a100:#fef3d6;--a50:#fffbf0;
+  --ink:#0d1f13;--ink-sub:#2d4a38;--ink-muted:#5a7a65;--ink-faint:#8aaa94;
+  --bg:#f2faf5;--bg-panel:#ffffff;--bg-input:#f8fdf9;
+  --surface-alt:#f2faf5;
+  --border:rgba(15,61,34,0.12);--border-strong:rgba(15,61,34,0.20);--border-focus:#27a865;
+  --shadow-sm:0 1px 3px rgba(10,40,24,0.08);--shadow-md:0 4px 16px rgba(10,40,24,0.10);
+  --shadow-lg:0 8px 32px rgba(10,40,24,0.14);--shadow-btn:0 4px 14px rgba(31,138,82,0.35);
+  --r-sm:6px;--r-md:10px;--r-lg:16px;--r-xl:24px;
+  --dur:200ms;--ease:cubic-bezier(0.4,0,0.2,1);
+  --font-display:'DM Serif Display',Georgia,serif;
+  --font-body:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+[data-theme=dark] {
+  --ink:#e8f5ee;--ink-sub:#b8d4c4;--ink-muted:#7a9e88;--ink-faint:#4a6e58;
+  --bg:#0d1a10;--bg-panel:#111e15;--bg-input:#132018;
+  --surface-alt:#0d1a10;
+  --border:rgba(39,168,101,0.12);--border-strong:rgba(39,168,101,0.22);--border-focus:#4dc98a;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.4);--shadow-md:0 4px 16px rgba(0,0,0,0.5);
+  --shadow-lg:0 8px 32px rgba(0,0,0,0.6);--shadow-btn:0 4px 14px rgba(39,168,101,0.30);
 }
 
 /* ── Navbar — owned by Navbar.css ── */
@@ -350,21 +408,15 @@ button{font-family:var(--font-body);cursor:pointer;border:none;}
 /* ── Form section styles (ported from original register.css) ── */
 /* ── Panel Card ───────────────────────────────────────────── */
 .panel-card {
-  background: var(--surface-glass);
-  backdrop-filter: blur(24px) saturate(1.3);
-  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  background: var(--bg-panel);
   border: 1px solid var(--border-strong);
   border-radius: var(--r-xl);
   padding: 36px 40px;
-  box-shadow:
-    0 0 0 1px rgba(10,40,24,0.06),
-    0 4px 6px rgba(10,40,24,0.04),
-    0 12px 40px rgba(10,40,24,0.10),
-    0 1px 0 rgba(255,255,255,0.85) inset;
-  transition: background 0.4s cubic-bezier(0.4,0,0.2,1), border-color 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: var(--shadow-md);
+  transition: background var(--dur-slow) var(--ease), border-color var(--dur-slow) var(--ease);
 }
 [data-theme=dark] .panel-card {
-  background: var(--surface-glass);
+  background: rgba(10,26,14,0.75);
   border-color: rgba(39,168,101,0.15);
   box-shadow: 0 0 0 1px rgba(39,168,101,0.08), 0 8px 40px rgba(0,0,0,0.5);
 }

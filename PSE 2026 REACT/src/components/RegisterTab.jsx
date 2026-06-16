@@ -8,7 +8,7 @@ import {
 import {
   isValidNigerianPhone, isValidTranRef,
   phoneExists, tranRefExists,
-  generateExamNumber, uploadPassportPhoto, insertCandidate,
+  generateExamNumber, insertCandidate,
   formatIssueDate
 } from '../utils/registerUtils'
 import { LGA_ZONE } from '../data/registerData'
@@ -28,7 +28,6 @@ export default function RegisterTab({ onPendingReady }) {
   const [selectedPapers, setSelectedPapers] = useState([])
   const [declared,      setDeclared]      = useState(false)
   const [photoDataURL,  setPhotoDataURL]  = useState(null)
-  const [photoFile,     setPhotoFile]     = useState(null)
   const [photoError,    setPhotoError]    = useState('')
   const [dragOver,      setDragOver]      = useState(false)
   const [loading,       setLoading]       = useState(false)
@@ -79,10 +78,25 @@ export default function RegisterTab({ onPendingReady }) {
     if (file.size > 2 * 1024 * 1024) {
       setPhotoError('File size must not exceed 2MB.'); return
     }
-    setPhotoFile(file)
-    const reader = new FileReader()
-    reader.onload = ev => setPhotoDataURL(ev.target.result)
-    reader.readAsDataURL(file)
+    const img = new Image()
+    const objectUrl = URL.createObjectURL(file)
+    img.onload = () => {
+      const canvas = document.createElement('canvas')
+      const MAX = 300
+      const ratio = Math.min(MAX / img.width, MAX / img.height)
+      canvas.width  = img.width  * ratio
+      canvas.height = img.height * ratio
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height)
+      const compressed = canvas.toDataURL('image/jpeg', 0.7)
+      URL.revokeObjectURL(objectUrl)
+      if (compressed.length > 50000) {
+        setPhotoDataURL(null)
+        setPhotoError('Photo could not be processed. Your registration will submit without it.')
+        return
+      }
+      setPhotoDataURL(compressed)
+    }
+    img.src = objectUrl
   }
 
   function handleDrop(e) {
@@ -133,14 +147,8 @@ export default function RegisterTab({ onPendingReady }) {
       const examNo = await generateExamNumber(lga, staffCategory)
 
       let photoURL = null
-      if (photoFile) {
-        showStatus('Uploading passport photograph…')
-        try { photoURL = await uploadPassportPhoto(photoFile, examNo) }
-        catch (photoErr) {
-          console.warn('[RegisterTab] photo upload failed:', photoErr)
-          showStatus('Photo upload failed — saving registration without photo…')
-          await new Promise(r => setTimeout(r, 1200))
-        }
+      if (photoDataURL) {
+        photoURL = photoDataURL
       }
 
       showStatus('Saving registration…')
@@ -186,7 +194,7 @@ export default function RegisterTab({ onPendingReady }) {
     setFullName(''); setPhone(''); setLga(''); setDisability('')
     setStaffCategory(''); setMinistry(''); setDepartment(''); setGradeLevel('')
     setTranRef(''); setAmountPaid(''); setExamCentre(''); setSelectedPapers([])
-    setDeclared(false); setPhotoDataURL(null); setPhotoFile(null); setPhotoError('')
+    setDeclared(false); setPhotoDataURL(null); setPhotoError('')
   }
 
   const submitDisabled = !declared || loading

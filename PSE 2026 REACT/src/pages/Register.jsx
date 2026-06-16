@@ -52,7 +52,18 @@ export default function Register() {
   }
 
   return (
-    <main>
+    <main className="register-page">
+
+      {/* ── Animated Mesh Background ── */}
+      <div className="bg-mesh" aria-hidden="true">
+        <div className="orb orb-1" />
+        <div className="orb orb-2" />
+        <div className="orb orb-3" />
+        <div className="orb orb-4" />
+      </div>
+
+      {/* ── Grain Texture ── */}
+      <div className="page-grain" aria-hidden="true" />
 
       {/* ── Page Header ── */}
       <header className="page-header">
